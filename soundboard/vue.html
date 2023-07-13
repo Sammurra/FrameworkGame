@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+
+  <style>
+    button {
+      border: 3px solid #BADA;
+      appearance: none;
+      background-color: #fff;
+      margin: 1rem;
+      padding: 10px;
+    }
+
+    button.playing {
+      background-color: #BADA;
+    }
+
+  </style>
+
+
+</head>
+
+<body>
+
+
+  <div id="app">
+    <h1>Soundboard</h1>
+    <audio v-for="sound in sounds" :src="`/sounds/${sound}.wav`" :id="sound" controls></audio>
+    <button v-for="sound in sounds" @click="playSound(sound)">
+      {{ sound }}
+    </button>
+  </div>
+
+  <script>
+    const { createApp } = Vue
+
+    createApp({
+
+      data() {
+        return {
+          message: 'Hello Vue!',
+          sounds: ['clap', 'hihat', 'kick', 'perc', 'snare', 'tom']
+        }
+      },
+
+      methods: {
+        playSound(sound = 'nothing') {
+          document.getElementById(sound).play()
+        }
+      }
+
+    }).mount('#app')
+  </script>
+</body>
+
+</html>
